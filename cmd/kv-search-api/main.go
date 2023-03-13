@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
 	"kv-search-api/internal/api"
 	"kv-search-api/internal/repository"
@@ -9,19 +10,25 @@ import (
 	"kv-search-api/pkg/config"
 	"log"
 	"net/http"
+	"os"
 )
 
 /*
 App runs on localhost, port 8000.
 */
 func main() {
-	err := run(8000, config.DBConnect())
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatalf("Error loading .env file")
+	}
+
+	err = run(os.Getenv("PORT"), config.DBConnect())
 	if err != nil {
 		log.Printf("Connection failed.")
 	}
 }
 
-func run(port int, mongoClient *mongo.Client) error {
+func run(port string, mongoClient *mongo.Client) error {
 	storageAPI := InitStorageAPI(mongoClient)
 	log.Printf("Server running at http://localhost:%d/", port)
 	http.HandleFunc("/api/create", storageAPI.Create)

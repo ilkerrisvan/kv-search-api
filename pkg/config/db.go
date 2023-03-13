@@ -5,10 +5,11 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
+	"os"
 )
 
 func DBConnect() *mongo.Client {
-	URL := "mongodb+srv://challengeUser:WUMglwNBaydH8Yvu@challenge-xzwqd.mongodb.net/getircase-study?retryWrites=true"
+	URL := os.Getenv("DB_URL")
 	if URL == "" {
 		log.Fatal("err")
 	}
