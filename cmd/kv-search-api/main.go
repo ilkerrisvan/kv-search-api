@@ -17,9 +17,9 @@ import (
 App runs on localhost, port 8000.
 */
 func main() {
-	err := godotenv.Load(".env")
+	err := godotenv.Load()
 	if err != nil {
-		log.Fatalf("Error loading .env file")
+		log.Fatal("Error loading .env file")
 	}
 
 	err = run(os.Getenv("PORT"), config.DBConnect())
@@ -30,12 +30,12 @@ func main() {
 
 func run(port string, mongoClient *mongo.Client) error {
 	storageAPI := InitStorageAPI(mongoClient)
-	log.Printf("Server running at http://localhost:%d/", port)
+	log.Printf("Server running at http://localhost:%s/", port)
 	http.HandleFunc("/api/create", storageAPI.Create)
 	http.HandleFunc("/api/fetch", storageAPI.Fetch)
 	http.HandleFunc("/api/search", storageAPI.Search)
 
-	err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
+	err := http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
 	if err != nil {
 		return err
 	}
