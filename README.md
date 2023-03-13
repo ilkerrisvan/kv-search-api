@@ -14,6 +14,7 @@ This API has two different duty, one of them is to create and fetch data to in-m
   - [GET `/api/get`](#get-allkeyvaluepairs)
   - [POST `/api/set`](#post-keyvaluepair)
   - [GET `/api/get-all`](#get-keyvaluepairs)
+- [Live URL](#live-url)
 - [Contact Information](#contact-information)
 - [License](#license)
 
@@ -24,8 +25,6 @@ This API has two different duty, one of them is to create and fetch data to in-m
 <hr/>
 
 ### Requirements:
-
-<hr/>
 
 - Go v1.17 or higher -> [Go Installation Page](https://go.dev/dl/)
 
@@ -170,6 +169,11 @@ If status code is 404.
 | 404     | Bad Request       |  No data found |
 <hr/>
 
+### Live URL:
+
+- [Live URL](https://kv-search-api.herokuapp.com/)
+
+<hr/>
 
 #### Author: İlker Rişvan
 
